@@ -66,6 +66,10 @@ public class VanillaJsTodoPage extends TodoPage {
     public void removeTodo(int todoIndex) {
 
         WebElement todoToRemove = getTodo(todoIndex);
+        removeTodo(todoToRemove);
+    }
+
+    private void removeTodo(WebElement todoToRemove){
         hoverOver(todoToRemove);
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(todoToRemove.findElement(By.cssSelector(".destroy"))))
@@ -142,6 +146,13 @@ public class VanillaJsTodoPage extends TodoPage {
     @Override
     public String getTodoCountText() {
         return todoCount.getText();
+    }
+
+    @Override
+    public void clearAllTodos() {
+      for (WebElement todo : todos) {
+          removeTodo(todo);
+      }
     }
 
 }

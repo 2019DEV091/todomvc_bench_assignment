@@ -38,4 +38,6 @@ public abstract class TodoPage extends PageObject {
 
     public abstract String getTodoCountText();
 
+    public abstract void clearAllTodos();
+
 }
