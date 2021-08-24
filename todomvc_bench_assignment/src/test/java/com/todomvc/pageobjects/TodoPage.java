@@ -20,7 +20,6 @@ public abstract class TodoPage extends PageObject {
     protected WebElement todoInput;
    
     @FindBy(css = ".todo-list li")
- //   @FindBy(css = "li[data-id]")
     protected List<WebElement> todos;
 
     @FindBy(css = ".todo-list li.completed")

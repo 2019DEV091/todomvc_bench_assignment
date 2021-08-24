@@ -8,7 +8,6 @@ public class PageFactory {
 
         switch (todoType) {
             case "vue":
-
                 return new VueTodoPage(driver);
             case "jquery":
                 return new JQueryTodoPage(driver);
