@@ -28,7 +28,6 @@ public class TodoTest {
     @BeforeMethod
     public void before(String todoType) {
 
-        System.out.println(todoType);
         driver = new ChromeDriver();
         todoPage = PageFactory.getTodoPage(todoType,driver);
         todoPage.goToUrl();
