@@ -4,24 +4,25 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class VanillaJsTodoPage extends TodoPage {
+public class VueTodoPage extends TodoPage {
 
-
-    @FindBy(css="a[href='#/']")
+    @FindBy(css = "a[href='#/all']")
     private WebElement allView;
 
-    public VanillaJsTodoPage(WebDriver driver) {
+    public VueTodoPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
     public void goToUrl() {
-        get("https://todomvc.com/examples/vanillajs/");
+        get("https://todomvc.com/examples/vue/");
+
     }
 
-
-    public void clickAllView() {
+    @Override
+    void clickAllView() {
         allView.click();
+
     }
 
 }

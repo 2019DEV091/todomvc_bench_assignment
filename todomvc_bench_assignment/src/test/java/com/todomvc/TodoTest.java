@@ -5,9 +5,8 @@ import static org.testng.Assert.assertEquals;
 
 import java.util.List;
 
+import com.todomvc.pageobjects.PageFactory;
 import com.todomvc.pageobjects.TodoPage;
-import com.todomvc.pageobjects.VanillaJsTodoPage;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
@@ -28,13 +27,13 @@ public class TodoTest {
     public void before() {
 
         driver = new ChromeDriver();
-        todoPage = new VanillaJsTodoPage(driver);
+        todoPage = PageFactory.getTodoPage(driver);
         todoPage.goToUrl();
     }
 
     @DataProvider
     public Object[][] createTodoProvider() {
-        return new Object[][] { { "Automation is fun!"}};
+        return new Object[][] { { "Automation is fun!" } };
     }
 
     @DataProvider
