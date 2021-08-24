@@ -13,29 +13,33 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+/**
+ * Parent of all TodoPage implementations.<br>
+ * methods and fields which are the same for each implementations are kept here
+ * so I have less duplication.
+ */
 public abstract class TodoPage extends PageObject {
-
 
     @FindBy(css = ".new-todo")
     protected WebElement todoInput;
-   
+
     @FindBy(css = ".todo-list li")
     protected List<WebElement> todos;
 
     @FindBy(css = ".todo-list li.completed")
     protected List<WebElement> completedTodos;
 
-    @FindBy(css="a[href='#/completed']")
+    @FindBy(css = "a[href='#/completed']")
     protected WebElement completedView;
 
-    @FindBy(css=".todo-count")
+    @FindBy(css = ".todo-count")
     protected WebElement todoCount;
-    
+
     public TodoPage(WebDriver driver) {
         super(driver);
     }
 
-    protected void get(String url){
+    protected void get(String url) {
         driver.get(url);
     }
 
@@ -47,7 +51,6 @@ public abstract class TodoPage extends PageObject {
         todoInput.sendKeys(todo + Keys.ENTER);
     }
 
-   
     public String getTodoText(int todoIndex) {
         return getTodo(todoIndex).findElement(By.cssSelector("label")).getText();
     }
@@ -57,12 +60,10 @@ public abstract class TodoPage extends PageObject {
 
     }
 
-    
     public int getNumberOfTodos() {
         return todos.size();
     }
 
- 
     public void removeTodo(int todoIndex) {
 
         WebElement todoToRemove = getTodo(todoIndex);
@@ -72,7 +73,6 @@ public abstract class TodoPage extends PageObject {
                 .click();
     }
 
-    
     public void createTodos(List<String> todos) {
         for (String todo : todos) {
             createTodo(todo);
@@ -83,7 +83,6 @@ public abstract class TodoPage extends PageObject {
         return todos.stream().map(todo -> todo.getText()).collect(Collectors.toList());
     }
 
-  
     public void completeTodo(int todoIndex) {
         clickComplete(getTodo(todoIndex));
     }
@@ -92,52 +91,56 @@ public abstract class TodoPage extends PageObject {
         todo.findElement(By.cssSelector("input.toggle")).click();
     }
 
-  
     public Boolean isTodoCompleted(int todoIndex) {
 
         return getTodo(todoIndex).getAttribute("class").contains("completed");
     }
 
-  
     public int getNumberOfCompletedTodos() {
         return completedTodos.size();
     }
 
-    
     public void editTodo(int todoIndex, String editText) {
         WebElement todoToEdit = getTodo(todoIndex);
         doubleClick(todoToEdit);
 
+        // Use waits to make sure certain conditions have happened before continuing.
+        // Selenium provides many ExpectedCondition Functions in the ExpectedConditions
+        // class, but you can always write more yourself.
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(todoToEdit.findElement(By.cssSelector(".edit"))));
+        //
+        // Chording keys means typing them together, for instance when you need to
+        // simulate ctrl+a
         todoToEdit.findElement(By.cssSelector(".edit"))
                 .sendKeys(Keys.chord(Keys.CONTROL, "a") + Keys.BACK_SPACE + editText + Keys.ENTER);
+        //
     }
 
     public String getTodoCountText() {
         return todoCount.getText();
     }
 
-    
     public void clickCompletedView() {
         completedView.click();
     }
 
-
-
+    // I used an enum(eration) here as input because this prevents typos (compared
+    // to using String) and an enumeration is a finite list, which works well with a
+    // switch
     public void changeViewTo(Views view) {
-      
+
         switch (view) {
             case COMPLETED:
                 clickCompletedView();
                 break;
-        
-                case ALL:
+
+            case ALL:
                 clickAllView();
             default:
                 break;
         }
-        
+
     }
 
 }

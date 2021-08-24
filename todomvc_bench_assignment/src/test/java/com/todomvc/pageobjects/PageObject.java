@@ -6,6 +6,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
+/**
+ * Parent of all PageObjects, has some common methods and uses PageFactory to instantiate WebElements
+ */
 public class PageObject {
 
 protected WebDriver driver;
