@@ -4,8 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 public class PageFactory {
 
-    public static TodoPage getTodoPage(WebDriver driver) {
-        String todoType = System.getProperty("todoType", "vanillajs");
+    public static TodoPage getTodoPage(String todoType,WebDriver driver) {
 
         switch (todoType) {
             case "vue":

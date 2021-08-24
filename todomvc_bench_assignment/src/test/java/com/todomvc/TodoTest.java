@@ -12,6 +12,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 /**
@@ -23,11 +24,13 @@ public class TodoTest {
     private WebDriver driver;
     private TodoPage todoPage;
 
+    @Parameters({"todoType"})
     @BeforeMethod
-    public void before() {
+    public void before(String todoType) {
 
+        System.out.println(todoType);
         driver = new ChromeDriver();
-        todoPage = PageFactory.getTodoPage(driver);
+        todoPage = PageFactory.getTodoPage(todoType,driver);
         todoPage.goToUrl();
     }
 
