@@ -1,5 +1,6 @@
 package com.todomvc.glue;
 
+import com.todomvc.pageobjects.PageFactory;
 import com.todomvc.pageobjects.TodoPage;
 import com.todomvc.pageobjects.VanillaJsTodoPage;
 
@@ -27,8 +28,9 @@ public class TodoSteps {
     @Before
     public void before() {
 
+      String todoType = System.getProperty("todoType","vanillajs");
         driver = new ChromeDriver();
-        todoPage = new VanillaJsTodoPage(driver);
+        todoPage = PageFactory.getTodoPage(todoType,driver);
         todoPage.goToUrl();
 
     }
