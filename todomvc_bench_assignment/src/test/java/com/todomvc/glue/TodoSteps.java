@@ -1,9 +1,6 @@
 package com.todomvc.glue;
 
-import com.todomvc.pageobjects.PageFactory;
 import com.todomvc.pageobjects.TodoPage;
-import com.todomvc.pageobjects.VanillaJsTodoPage;
-
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +13,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import static com.todomvc.pageobjects.PageFactory.getTodoPage;
 import static org.testng.Assert.assertEquals;
 
 public class TodoSteps {
@@ -30,7 +28,7 @@ public class TodoSteps {
 
         String todoType = System.getProperty("todoType", "vanillajs");
         driver = new ChromeDriver();
-        todoPage = PageFactory.getTodoPage(todoType, driver);
+        todoPage = getTodoPage(todoType, driver);
         todoPage.goToUrl();
 
     }
