@@ -32,6 +32,7 @@ Feature: Adding todos
         Then that todo will show as completed
         And the number of completed todos will be 1
 
+
     Scenario: Editing a todo
         Given I have created the following todos
             | Todo1  |

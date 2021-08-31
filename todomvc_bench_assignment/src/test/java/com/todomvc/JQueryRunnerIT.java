@@ -7,11 +7,11 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(features = "classpath:features", plugin = "json:target/cucumber-report/cucumber.json")
-public class RunnerIT extends AbstractTestNGCucumberTests{
+public class JQueryRunnerIT extends AbstractTestNGCucumberTests{
 
     @BeforeClass
     public void beforeClass(){
-        System.setProperty("todoType", "vanillajs");
+        System.setProperty("todoType", "jquery");
     }
     
     @Override

@@ -156,4 +156,10 @@ public abstract class TodoPage extends PageObject {
                 .click();
     }
 
+    public void completeTodos(List<Integer> todos) {
+        for (int todo : todos) {
+            completeTodo(todo-1); 
+        }
+    }
+
 }

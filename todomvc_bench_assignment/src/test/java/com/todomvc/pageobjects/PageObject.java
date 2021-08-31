@@ -20,7 +20,7 @@ protected WebDriver driver;
         Pagefactory method will take care of instantiating al you WebElements in the PageObjects which extend from the PageObkject class.
         The AjaxElementLocatorFactory will try to find each element you call on for a maximum of 10 seconds (this can be changed to another timeout)
         */
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
+        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 1), this);
     }
     
 
