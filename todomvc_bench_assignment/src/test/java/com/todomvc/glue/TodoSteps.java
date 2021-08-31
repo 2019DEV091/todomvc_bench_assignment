@@ -40,6 +40,21 @@ public class TodoSteps {
 
     }
 
+    /**
+     * A parameterType allows you to extend the built in cucumber expression
+     * parameterTypes. For example, here I have created a parameterType that matches
+     * abbreviated numbers and converts it to an integer. How does it work? In the
+     * value parameter I define a regular expression to define the text that must
+     * match in the Gherkin Step. In this case the regex means: At least one digit
+     * followed by one of the following: st,nd,rd,th. Once we have the matched part
+     * I'm only interested in the digits, so I capture those in a capture group and
+     * pass it as parameter in my method. Now I have a parameterType that I can use
+     * in any SteDefinition (see below for some examples) in the glue package (so
+     * not only this class)
+     * 
+     * @param abbreviation
+     * @return
+     */
     @ParameterType(value = "(\\d+)(?:st|nd|rd|th)")
     public Integer numberAbbreviation(String abbreviation) {
         return Integer.parseInt(abbreviation);
@@ -133,9 +148,9 @@ public class TodoSteps {
     public void i_have_completed_the_following_todos(List<Integer> todos) {
         completedTodos = new ArrayList<>();
         for (Integer todo : todos) {
-            completedTodos.add(todoPage.getTodoText(todo-1));
+            completedTodos.add(todoPage.getTodoText(todo - 1));
         }
-       todoPage.completeTodos(todos);
+        todoPage.completeTodos(todos);
     }
 
     @Then("only the completed todos will be shown")
@@ -143,12 +158,20 @@ public class TodoSteps {
         assertThat(todoPage.getAllTodosText()).containsExactlyInAnyOrderElementsOf(completedTodos);
     }
 
+    // The Scenario object is optional. It provides metadata about the scenario this
+    // method applies to.
     @After
     public void after(Scenario scenario) {
 
+        // This is optional. Usually a screenshot is taken when there is a failed
+        // scenario. To know if a scenario has failed -> scenario.isFailed();
         try {
             scenario.attach(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES), "image/png", "failed test");
-        } finally {
+        }
+        // used try finally because we want to make sure our driver will be cleaned up.
+        // If we don't use it and there is an exception, we run the risk of having an
+        // open browser/driver.
+        finally {
             if (driver != null) {
                 driver.quit();
             }
