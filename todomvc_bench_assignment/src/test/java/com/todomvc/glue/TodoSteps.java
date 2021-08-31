@@ -28,16 +28,16 @@ public class TodoSteps {
     @Before
     public void before() {
 
-      String todoType = System.getProperty("todoType","vanillajs");
+        String todoType = System.getProperty("todoType", "vanillajs");
         driver = new ChromeDriver();
-        todoPage = PageFactory.getTodoPage(todoType,driver);
+        todoPage = PageFactory.getTodoPage(todoType, driver);
         todoPage.goToUrl();
 
     }
 
     @Given("I have no todos yet")
     public void i_have_no_todos_yet() {
-        if(todoPage.getNumberOfTodos() >0){
+        if (todoPage.getNumberOfTodos() > 0) {
             todoPage.clearAllTodos();
         }
     }
@@ -59,7 +59,7 @@ public class TodoSteps {
     public void after(Scenario scenario) {
 
         try {
-              scenario.attach(((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES), "image/png", "failed test");
+            scenario.attach(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES), "image/png", "failed test");
         } finally {
             if (driver != null) {
                 driver.quit();
