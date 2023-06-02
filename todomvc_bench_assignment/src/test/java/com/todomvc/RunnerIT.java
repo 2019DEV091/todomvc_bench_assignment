@@ -1,23 +1,28 @@
 package com.todomvc;
 
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.platform.suite.api.ConfigurationParameter;
+import org.junit.platform.suite.api.IncludeEngines;
+import org.junit.platform.suite.api.SelectClasspathResource;
+import org.junit.platform.suite.api.Suite;
 
-import io.cucumber.testng.AbstractTestNGCucumberTests;
-import io.cucumber.testng.CucumberOptions;
+import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
+import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
-@CucumberOptions(features = "classpath:features", plugin = "json:target/cucumber-report/cucumber.json")
-public class RunnerIT extends AbstractTestNGCucumberTests{
 
-    @BeforeClass
+
+@Suite
+@IncludeEngines("cucumber")
+@SelectClasspathResource("com/ctg/cucumber_selenium")
+@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
+@ConfigurationParameter(key=GLUE_PROPERTY_NAME, value="com/ctg/cucumber_selenium")
+
+public class RunnerIT{
+
+    @BeforeAll
     public void beforeClass(){
         System.setProperty("todoType", "vanillajs");
     }
-    
-    @Override
-    @DataProvider(parallel = true)
-    public Object[][] scenarios() {
-        return super.scenarios();
-    }
+
     
 }
