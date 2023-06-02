@@ -259,7 +259,7 @@
 							<version>3.0.0-M8</version>
 							<configuration>
 								<includes>
-									<include>JQueryRunnerTest.java</include>
+									<include>RunnerTest.java</include>
 									<configurationParameters>
 										cucumber.junit-platform.naming-strategy=long
 									</configurationParameters>
