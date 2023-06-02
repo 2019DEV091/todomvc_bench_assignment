@@ -17,7 +17,7 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key=GLUE_PROPERTY_NAME, value="com/ctg/cucumber_selenium")
 
-public class RunnerIT{
+public class RunnerTest{
 
     @BeforeAll
     public void beforeClass(){
