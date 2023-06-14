@@ -34,7 +34,8 @@ public class PageFactory {
      */
     public static TodoPage getTodoPage(WebDriver driver) {
 
-        String todoType = System.getProperty("todoType");
+    	//defaulting to vanillajs if no property found. Just for demonstration purposes
+        String todoType = System.getProperty("todoType", "vanillajs");
         return getTodoPage(todoType, driver);
     }
 }
